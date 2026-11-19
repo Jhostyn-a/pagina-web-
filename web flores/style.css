@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap');
+p {
+  font-family: "Modern Antiqua", serif;
+}
+/* ============================================
+   VARIABLES DE COLOR
+   ============================================ */
+:root {
+  --color-principal: #e0568f;   /* rosado fuerte: botones y títulos */
+  --color-suave: #fde4ee;       /* rosado claro: tarjetas y cajas */
+  --color-encabezado: #f8c8dc;  /* rosado del fondo del título */
+  --color-titulo: #8a1f4f;      /* color del título principal */
+  --fondo: #f3ecfa;             /* fondo de la página (lavanda suave) */
+  --texto: #3b2a33;             /* color del texto */
+}
+
+/* Fondos: el botón "Cambia tu estilo" le pone una de estas clases
+   al <body>. Cada una cambia SOLO la variable --fondo; los demás
+   colores de la página se quedan igual. */
+body.fondo-menta {
+  --fondo: #e3f4ec;
+}
+
+body.fondo-celeste {
+  --fondo: #e4f0fa;
+}
+
+body.fondo-crema {
+  --fondo: #fff4e0;
+}
+
+/* ============================================
+   ESTILOS GENERALES
+   ============================================ */
+* {
+  box-sizing: border-box;  /* el padding no agranda las cajas */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* al pulsar el menú, baja suavemente */
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.6;
+  transition: background 0.4s;
+}
+
+/* ============================================
+   ENCABEZADO
+   ============================================ */
+.encabezado {
+  text-align: center;
+  padding: 40px 20px 30px;
+  background: var(--color-encabezado);  /* fondo rosado detrás del título */
+  border-radius: 0 0 40px 40px;         /* esquinas de abajo redondeadas */
+}
+
+.logo {
+  font-size: 3.5rem;
+  /* Aplica la animación "mover-flor" (definida abajo):
+     dura 4 segundos, se repite siempre y va y vuelve (alternate). */
+  animation: mover-flor 4s ease-in-out infinite alternate;
+}
+
+/* @keyframes define los pasos de la animación.
+   "from" es el inicio (izquierda) y "to" el final (derecha). */
+@keyframes mover-flor {
+  from {
+    transform: translateX(-100px) rotate(-20deg);
+  }
+  to {
+    transform: translateX(100px) rotate(20deg);
+  }
+}
+
+/* Si la persona tiene activada la opción de reducir movimiento
+   en su dispositivo, la flor se queda quieta. */
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    animation: none;
+  }
+}
+
+.encabezado h1 {
+  font-family: "Rouge Script", cursive;
+  color: var(--color-titulo);
+  font-size: 3.5rem;
+  font-weight: normal;
+}
+
+/* ============================================
+   MENÚ
+   ============================================ */
+/* El botón del menú usa la clase .boton (la misma del botón de WhatsApp).
+   Este contenedor solo lo centra y le da espacio. */
+.contenedor-boton-menu {
+  text-align: center;
+  margin: 20px 0 14px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 12px;
+  background: var(--color-suave);
+  position: sticky;   /* se queda pegado arriba al bajar */
+  top: 0;
+  z-index: 10;
+}
+
+.menu a {
+  color: var(--color-principal);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+/* Esta clase la agrega JavaScript para esconder el menú */
+.menu.oculto {
+  display: none;
+}
+
+/* ============================================
+   SECCIONES
+   ============================================ */
+.seccion {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.seccion h2 {
+  color: var(--color-principal);
+  margin-bottom: 24px;
+}
+
+.texto-centrado {
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+/* Cuadrícula: se acomoda sola según el ancho de la pantalla */
+.cuadricula {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ============================================
+   BENEFICIOS Y TARJETAS
+   ============================================ */
+.beneficio,
+.tarjeta {
+  background: var(--color-suave);
+  border-radius: 16px;
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.beneficio:hover,
+.tarjeta:hover {
+  transform: translateY(-6px);  /* sube un poquito al pasar el mouse */
+}
+
+.icono {
+  font-size: 2.5rem;
+}
+
+.tarjeta img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;      /* recorta la imagen sin deformarla */
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: #fff;
+}
+
+.precio {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: bold;
+  color: var(--color-principal);
+  font-size: 1.2rem;
+}
+
+/* ============================================
+   BOTONES
+   ============================================ */
+.boton {
+  display: inline-block;
+  background: var(--color-principal);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.boton:hover {
+  transform: scale(1.05);
+}
+
+.boton-secundario {
+  background: #fff;
+  color: var(--color-principal);
+  border: 2px solid var(--color-principal);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   LIKES, CONSEJO Y FORMULARIO
+   ============================================ */
+.likes {
+  margin-top: 30px;
+}
+
+.likes p {
+  margin-top: 10px;
+}
+
+.consejo-caja {
+  background: var(--color-suave);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.consejo-caja .boton {
+  margin-top: 12px;
+}
+
+.consejo {
+  margin-top: 14px;
+  font-style: italic;
+}
+
+.formulario {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.formulario input {
+  padding: 10px;
+  border: 2px solid var(--color-suave);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.formulario input:focus {
+  outline: none;
+  border-color: var(--color-principal);  /* resalta al escribir */
+}
+
+.formulario .boton {
+  margin-top: 12px;
+}
+
+.mensaje {
+  text-align: center;
+  color: var(--color-principal);
+  font-weight: bold;
+}
+
+/* ============================================
+   PIE DE PÁGINA
+   ============================================ */
+.pie {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--color-suave);
+}
+
+.pie p {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+
+
+
+/* ============================================
+   PROYECTO ESPAÑOL
+   ============================================ */
+.lista-integrantes {
+  list-style: none;            /* quita los puntitos de la lista */
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;      /* uno debajo del otro */
+  gap: 12px;
+}
+
+.lista-integrantes a {
+  display: block;              /* todo el rectángulo es clicable */
+  background: var(--color-suave);
+  color: var(--color-principal);
+  font-weight: bold;
+  text-decoration: none;
+  padding: 14px 20px;
+  border-radius: 16px;
+  transition: transform 0.2s;
+}
+
+.lista-integrantes a:hover {
+  transform: translateX(6px);  /* se mueve un poco al pasar el mouse */
+}
+
+/* El video de las páginas de podcast */
+.video {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  aspect-ratio: 16 / 9;        /* mantiene la forma de pantalla de video */
+  border: none;
+  border-radius: 16px;
+}
+
+.volver {
+  margin-top: 24px;
+}
